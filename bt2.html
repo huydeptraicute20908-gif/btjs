@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kiểm tra chỉ số BMI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      .box {
+        max-width: 420px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 6px;
+      }
+      .row {
+        margin-bottom: 12px;
+      }
+      label {
+        display: inline-block;
+        width: 130px;
+      }
+      input {
+        padding: 6px;
+        width: 180px;
+      }
+      button {
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+      #ketqua {
+        margin-top: 15px;
+        padding: 12px;
+        background: #f4f4f4;
+        border-left: 4px solid #0066cc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h2>Tính chỉ số BMI</h2>
+      <div class="row">
+        <label>Cân nặng (kg):</label>
+        <input type="number" id="cannang" step="0.1" placeholder="Ví dụ: 65" />
+      </div>
+      <div class="row">
+        <label>Chiều cao (cm):</label>
+        <input
+          type="number"
+          id="chieucao"
+          step="0.1"
+          placeholder="Ví dụ: 175"
+        />
+      </div>
+      <button onclick="tinhBMI()">Tính BMI</button>
+      <div id="ketqua">Phần hiển thị kết quả chỉ số BMI</div>
+    </div>
+
+    <script>
+      function tinhBMI() {
+        const w = parseFloat(document.getElementById("cannang").value);
+        const hCm = parseFloat(document.getElementById("chieucao").value);
+        const kq = document.getElementById("ketqua");
+
+        if (isNaN(w) || isNaN(hCm) || w <= 0 || hCm <= 0) {
+          kq.innerHTML = "Vui lòng nhập cân nặng và chiều cao hợp lệ.";
+          return;
+        }
+
+        const h = hCm / 100;
+        const bmi = w / (h * h);
+        let loai = "";
+
+        if (bmi < 16) loai = "Gầy độ III";
+        else if (bmi < 17) loai = "Gầy độ II";
+        else if (bmi < 18.5) loai = "Gầy độ I";
+        else if (bmi < 25) loai = "Bình thường";
+        else if (bmi < 30) loai = "Thừa cân";
+        else if (bmi < 35) loai = "Béo phì độ I";
+        else if (bmi < 40) loai = "Béo phì độ II";
+        else loai = "Béo phì độ III";
+
+        kq.innerHTML = `BMI: <b>${bmi.toFixed(2)}</b><br>Phân loại: <b>${loai}</b>`;
+      }
+    </script>
+  </body>
+</html>
