@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo SweetAlert2</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 30px;
+      }
+      button {
+        margin: 6px;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Demo thư viện SweetAlert2</h2>
+    <button onclick="fireSuccess()">1. Success</button>
+    <button onclick="fireInfo()">2. Info</button>
+    <button onclick="fireError()">3. Error</button>
+    <button onclick="showAlertTopEnd()">4. Top-end</button>
+    <button onclick="showDialogWithPassingParams()">5. Confirm</button>
+
+    <script>
+      function fireSuccess() {
+        Swal.fire({
+          icon: "success",
+          title: "Thành công",
+          text: "Thêm mới sản phẩm thành công!",
+        });
+      }
+      function fireInfo() {
+        Swal.fire({
+          icon: "info",
+          title: "Thông báo",
+          text: "Chúc mừng bạn được 10 điểm!",
+        });
+      }
+      function fireError() {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
+      }
+      function showAlertTopEnd() {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Display this alert in top right corner",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+      function showDialogWithPassingParams() {
+        Swal.fire({
+          icon: "warning",
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

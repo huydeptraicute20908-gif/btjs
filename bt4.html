@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Caro Game</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .controls {
+        margin-bottom: 15px;
+      }
+      .controls button {
+        padding: 6px 14px;
+        margin: 0 4px;
+        cursor: pointer;
+      }
+      #board {
+        display: inline-block;
+        border: 2px solid #333;
+      }
+      .row {
+        display: flex;
+      }
+      .row:nth-child(odd) .cell {
+        background-color: #f9f9f9;
+      }
+      .row:nth-child(even) .cell {
+        background-color: #e3f2fd;
+      }
+      .cell {
+        width: 34px;
+        height: 34px;
+        border: 1px solid #888;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+      }
+      .title {
+        margin-top: 10px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button id="btnHide">Hide</button>
+      <button id="btnShow">Show</button>
+      <button id="btnToggle">Toggle</button>
+    </div>
+
+    <div id="board"></div>
+    <div class="title">CARO GAME</div>
+
+    <script>
+      $(document).ready(function () {
+        const size = 10;
+        let turn = "X";
+
+        for (let r = 0; r < size; r++) {
+          const $row = $('<div class="row"></div>');
+          for (let c = 0; c < size; c++) {
+            const $cell = $('<div class="cell"></div>');
+            $cell.on("click", function () {
+              if ($(this).text() === "") {
+                $(this).text(turn);
+                turn = turn === "X" ? "O" : "X";
+              }
+            });
+            $row.append($cell);
+          }
+          $("#board").append($row);
+        }
+
+        $("#btnHide").click(function () {
+          $("#board").hide(300);
+        });
+        $("#btnShow").click(function () {
+          $("#board").show(300);
+        });
+        $("#btnToggle").click(function () {
+          $("#board").toggle(300);
+        });
+      });
+    </script>
+  </body>
+</html>
